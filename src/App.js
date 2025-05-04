@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Homescreen from './components/Homescreen';
+import LoginModal from './components/LoginModal';
+import './styles/App.css';
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleLogin = (loginData) => {
+    console.log("Data login diterima di App:", loginData);
+    alert(`Login attempt with Username: ${loginData.username}`);
+    // Modal akan ditutup oleh komponen LoginModal
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* Pass handleOpenModal ke Homescreen */}
+      <Homescreen onLoginClick={handleOpenModal} />
+
+      {/* LoginModal tetap sama */}
+      <LoginModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onLoginSubmit={handleLogin}
+      />
     </div>
   );
 }

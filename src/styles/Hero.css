@@ -1,0 +1,218 @@
+/* src/styles/Hero.css */
+
+/* Container utama section */
+.hero-section {
+  /* Tambahkan padding vertikal untuk memberi ruang di atas/bawah */
+  padding: 20px 0;
+  /* Gunakan min-height agar section setidaknya punya tinggi tertentu, tapi bisa memanjang */
+  min-height: 80vh; /* Contoh: Minimal 80% tinggi viewport */
+  display: flex; /* Gunakan flexbox untuk centering konten jika diperlukan */
+  align-items: center; /* Center vertikal */
+  justify-content: center; /* Center horizontal */
+  overflow: hidden; /* Penting untuk mencegah konten meluap */
+  transition: background-color 0.6s ease; /* Pertahankan transisi warna */
+}
+
+/* Aturan dasar slide (pertahankan yang sudah ada jika sesuai) */
+.carousel .slide {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Sesuaikan padding atau margin slide jika perlu */
+  padding: 0 10px; /* Tambahkan sedikit padding horizontal pada slide */
+}
+
+.carousel .slide img {
+  /* Sesuaikan max-height agar tidak terlalu besar di layar besar */
+  max-height: 75vh;
+  width: auto; /* Biarkan lebar otomatis berdasarkan proporsi */
+  /* object-fit: contain; */ /* Gunakan contain jika ingin seluruh gambar terlihat */
+  display: inline-block;
+  vertical-align: middle;
+  /* Pastikan gambar tidak melebihi lebar kontainernya di layar kecil */
+  max-width: 100%;
+  height: auto; /* Jaga aspek rasio */
+}
+
+/* --- Kustomisasi Panah Navigasi dan Dots --- */
+
+/* Sembunyikan titik indikator (dots) */
+.carousel .control-dots {
+  display: none; /* Ini memastikan dots tidak terlihat */
+}
+
+/* Styling untuk panah navigasi */
+.carousel .control-arrow {
+  background: none !important;
+  opacity: 1 !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 0 !important;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  position: absolute;
+  /* Posisi default di pojok kanan bawah */
+  bottom: 20px !important;
+  top: auto !important;
+  margin-top: 0 !important;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* Efek saat hover pada area panah */
+.carousel .control-arrow:hover {
+  opacity: 0.7 !important;
+  background: none !important;
+}
+
+/* Styling ikon panah internal */
+.carousel .control-arrow:before {
+  content: '';
+  display: block;
+  border-style: solid;
+  border-color: #555 !important; /* Warna abu gelap */
+  border-width: 0 3px 3px 0 !important;
+  width: 12px;
+  height: 12px;
+  position: relative;
+  top: 0;
+  left: 0;
+  /* Hapus transform: translate(-50%, -50%); jika padding di parent sudah cukup untuk centering */
+}
+
+/* Rotasi dan posisi ikon panah Kiri (Prev) */
+.carousel .control-prev.control-arrow:before {
+  transform: rotate(135deg);
+}
+
+/* Rotasi dan posisi ikon panah Kanan (Next) */
+.carousel .control-next.control-arrow:before {
+  transform: rotate(-45deg);
+}
+
+/* Posisi spesifik untuk panah Kanan (Next) */
+.carousel .control-next.control-arrow {
+  right: 20px !important;
+  left: auto !important;
+}
+
+/* Posisi spesifik untuk panah Kiri (Prev) */
+.carousel .control-prev.control-arrow {
+  /* Atur posisi relatif terhadap tombol Next */
+  right: calc(20px + 25px + 10px) !important; /* 20px dari kanan + ~25px lebar ikon/padding + 10px jarak antar panah */
+  left: auto !important;
+}
+
+/* Styling untuk legenda/teks di atas slide (jika Anda menambahkannya) */
+.carousel .slide .legend {
+  position: absolute;
+  bottom: 60px; /* Naikkan sedikit, di atas area panah */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  opacity: 1 !important;
+  width: auto;
+  max-width: 80%; /* Batasi lebar legenda */
+  text-align: center;
+  z-index: 2;
+  /* Tambahkan word-wrap untuk teks panjang */
+  word-wrap: break-word;
+}
+
+/* Sembunyikan panah default dari gambar lama jika ada (jaga ini jika relevan) */
+.hero-arrows {
+  display: none;
+}
+
+/* Pastikan elemen .carousel itu sendiri memiliki position: relative */
+.carousel {
+  position: relative;
+  width: 100%; /* Pastikan carousel mengambil lebar penuh kontainer */
+  max-width: 1200px; /* Atur max-width agar tidak terlalu lebar di layar desktop */
+  margin: 0 auto; /* Pusatkan carousel */
+}
+
+/* --- Media Queries untuk Responsiveness --- */
+
+/* Untuk layar yang lebih kecil dari 768px (misalnya, tablet atau mobile) */
+@media (max-width: 767px) {
+  .hero-section {
+      min-height: 60vh; /* Kurangi min-height di layar yang lebih kecil */
+      padding: 10px 0; /* Kurangi padding */
+  }
+
+  .carousel .slide img {
+      max-height: 50vh; /* Kurangi max-height gambar */
+  }
+
+  /* Sesuaikan posisi panah di layar kecil agar tidak terlalu mepet */
+  .carousel .control-arrow {
+      bottom: 10px !important; /* Kurangi jarak dari bawah */
+      padding: 5px; /* Kurangi padding area klik */
+  }
+
+  .carousel .control-next.control-arrow {
+      right: 10px !important; /* Kurangi jarak dari kanan */
+  }
+
+  .carousel .control-prev.control-arrow {
+      /* Sesuaikan posisi panah kiri berdasarkan panah kanan yang baru */
+      right: calc(10px + 20px + 5px) !important; /* 10px dari kanan + ~20px lebar + 5px jarak */
+  }
+
+  .carousel .control-arrow:before {
+      width: 8px; /* Kurangi ukuran ikon panah */
+      height: 8px;
+      border-width: 0 2px 2px 0 !important; /* Kurangi ketebalan border ikon */
+  }
+
+  .carousel .slide .legend {
+      bottom: 40px; /* Naikkan legenda agar tidak tumpang tindih dengan panah */
+      font-size: 0.9rem; /* Kurangi ukuran font legenda */
+      padding: 8px 15px; /* Kurangi padding legenda */
+      max-width: 90%; /* Biarkan legenda sedikit lebih lebar */
+  }
+}
+
+/* Untuk layar yang sangat kecil (misalnya, ponsel) */
+@media (max-width: 480px) {
+  .hero-section {
+      min-height: 50vh;
+      padding: 5px 0;
+  }
+
+  .carousel .slide img {
+      max-height: 40vh;
+  }
+
+  .carousel .control-arrow {
+      bottom: 5px !important;
+      padding: 3px;
+  }
+
+  .carousel .control-next.control-arrow {
+      right: 5px !important;
+  }
+
+  .carousel .control-prev.control-arrow {
+      right: calc(5px + 15px + 3px) !important; /* Sesuaikan perhitungan */
+  }
+
+  .carousel .control-arrow:before {
+      width: 6px;
+      height: 6px;
+      border-width: 0 1px 1px 0 !important;
+  }
+
+  .carousel .slide .legend {
+      bottom: 30px;
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      max-width: 95%;
+  }
+}

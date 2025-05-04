@@ -1,0 +1,339 @@
+/* src/styles/Header.css */
+.app-header {
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.logo img {
+  height: 40px;
+  display: block;
+}
+
+/* Gaya untuk Navigasi Utama (Desktop) */
+.navigation {
+  /* Gunakan flex-grow agar navigasi mengisi ruang di tengah pada desktop */
+  flex-grow: 1;
+  display: flex; /* Pastikan flex di desktop */
+  justify-content: center; /* Tengahkan menu navigasi di desktop */
+  align-items: center;
+}
+
+.navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 30px;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navigation a:hover {
+  color: #007bff;
+}
+
+/* Grup Ikon di kanan + Hamburger (di React sudah dipindahkan ke sini) */
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Jarak antar ikon */
+  /* Order di flexbox jika perlu mengubah urutan grup ikon relatif terhadap logo/nav */
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.icon-button svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.icon-button i { /* Gaya untuk Font Awesome */
+   font-size: 22px;
+}
+
+.icon-button:hover {
+  color: #007bff;
+}
+
+/* --- Style untuk Mobile --- */
+
+/* Tombol Hamburger di dalam header-icons */
+.header-icons .menu-toggle {
+  display: none; /* Sembunyikan di layar besar */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px; /* Padding ikon */
+  color: #555;
+  transition: color 0.2s ease;
+  /* Atur order di flexbox JIKA ingin mengubah posisi HAMBURGER relative to other icons inside header-icons */
+  /* Contoh: order: 1; agar hamburger muncul setelah ikon cart dan user */
+}
+
+.header-icons .menu-toggle:hover {
+  color: #007bff;
+}
+
+/* Gaya ikon Hamburger SVG */
+.header-icons .menu-toggle svg {
+   width: 24px;
+   height: 24px;
+   stroke: currentColor;
+   stroke-width: 2;
+   stroke-linecap: round;
+   stroke-linejoin: round;
+}
+/* Gaya ikon Font Awesome hamburger */
+.header-icons .menu-toggle i {
+  font-size: 24px;
+}
+
+
+/* Media Query untuk Layar Tablet dan Mobile */
+@media (max-width: 768px) {
+  .header-container {
+      padding: 0 15px;
+      height: 55px;
+       /* Di mobile, kita tidak ingin nav mengisi ruang lagi, biarkan logo & ikon tersebar */
+       justify-content: space-between;
+       flex-wrap: nowrap; /* Pastikan item header tidak wrap */
+  }
+
+  .logo img {
+      height: 35px;
+  }
+
+  /* Navigasi Utama (Desktop) - Sembunyikan di mobile */
+  .navigation {
+      display: none; /* Sembunyikan navigasi utama */
+      flex-grow: 0; /* Navigasi tidak lagi mengisi ruang */
+  }
+
+  /* Grup Ikon di kanan */
+  .header-icons {
+      gap: 12px; /* Kurangi jarak antar item di grup ikon */
+      align-items: center; /* Pastikan ikon tengah vertikal */
+  }
+
+   /* Tampilkan tombol hamburger di dalam header-icons */
+  .header-icons .menu-toggle {
+      display: flex; /* Tampilkan sebagai flex item untuk menengahkan ikon */
+      align-items: center;
+      justify-content: center;
+      padding: 5px; /* Sesuaikan padding */
+      order: -1; /* Default: tampilkan hamburger di paling kiri di dalam grup ikon. Ubah ke 1 atau 2 dst jika ingin di paling kanan */
+       /* Jika ingin di paling kanan, ubah order: 1; atau lebih besar dari order ikon lain (ikon lain order defaultnya 0) */
+  }
+
+
+  /* Gaya untuk Mobile Menu saat terbuka (Overlay) */
+  .navigation.open {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      background-color: #fff;
+      z-index: 150;
+      padding: 20px; /* Padding di dalam menu mobile */
+      overflow-y: auto;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+      animation: slideInMenu 0.3s ease-out forwards;
+       /* Jika menu muncul dari kanan, ubah: */
+       /* left: auto; right: 0; transform: translateX(100%); @keyframes slideInMenu from { transform: translateX(100%); } to { transform: translateX(0); } */
+  }
+
+  @keyframes slideInMenu {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+  }
+
+   /* Tombol Tutup untuk Mobile Menu */
+  .mobile-menu-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 30px;
+      cursor: pointer;
+      color: #888;
+      padding: 5px;
+      line-height: 1;
+      z-index: 100; /* Pastikan di atas item menu */
+      transition: color 0.2s ease;
+  }
+   .mobile-menu-close:hover {
+      color: #555;
+   }
+
+
+  /* Kontainer item menu mobile */
+  .navigation.open ul {
+      flex-direction: column;
+      align-items: flex-start; /* Rata kiri item list */
+      padding: 0;
+      margin-top: 50px; /* Lebih banyak ruang di atas untuk tombol tutup */
+      width: 100%;
+  }
+
+  /* Item List di menu mobile */
+  .navigation.open li {
+      width: 100%;
+      border-bottom: 1px solid #eee;
+      padding: 12px 0; /* Padding vertikal */
+       /* Pastikan tidak ada margin/padding horizontal yang tidak diinginkan */
+       margin: 0;
+       list-style: none; /* Pastikan tidak ada bullet */
+  }
+   .navigation.open li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+  }
+
+
+  /* Link di menu mobile */
+  .navigation.open a {
+       font-size: 16px;
+       color: #333;
+       display: block; /* Buat area klik besar */
+       padding: 0 10px; /* Padding horizontal pada link */
+       font-weight: 500;
+       text-decoration: none;
+       width: 100%; /* Pastikan link mengisi lebar li */
+       box-sizing: border-box; /* Padding termasuk dalam lebar */
+  }
+   .navigation.open a:hover {
+      color: #007bff;
+  }
+
+   /* Gaya untuk tombol login di dalam mobile menu (jika ditambahkan) */
+  .navigation.open .mobile-login-button {
+       background: none;
+       border: none;
+       padding: 12px 10px; /* Padding sama dengan link */
+       font-size: 16px;
+       font-weight: 500;
+       color: #333;
+       cursor: pointer;
+       width: 100%;
+       text-align: left;
+       box-sizing: border-box;
+  }
+   .navigation.open .mobile-login-button:hover {
+       color: #007bff;
+   }
+
+
+  /* Pastikan ikon di header-icons tetap terlihat */
+  .header-icons {
+       position: relative;
+       z-index: 110;
+       align-items: center;
+       /* Pastikan gap antara hamburger dan ikon lain */
+       gap: 12px; /* Atur gap yang sama */
+  }
+   .header-icons .icon-button {
+        padding: 5px;
+        /* Atur order jika perlu mengubah urutan ikon */
+        /* order: 0; atau order: 1; */
+   }
+}
+
+/* Media Query untuk Layar Sangat Kecil */
+@media (max-width: 480px) {
+  .header-container {
+      padding: 0 10px;
+      height: 50px; /* Sesuaikan tinggi lagi */
+  }
+  .logo img {
+      height: 30px;
+  }
+  .header-icons {
+      gap: 10px; /* Kurangi jarak antar ikon */
+  }
+   .icon-button svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 1.5;
+   }
+    .icon-button i {
+       font-size: 18px;
+   }
+   .header-icons .menu-toggle {
+       padding: 3px; /* Kurangi padding tombol hamburger */
+        /* Sesuaikan ukuran ikon di sini jika perlu */
+   }
+   .header-icons .menu-toggle svg {
+       width: 20px;
+       height: 20px;
+   }
+    .header-icons .menu-toggle i {
+       font-size: 20px;
+    }
+
+
+   .navigation.open {
+       width: 90%;
+       padding: 15px;
+   }
+    .navigation.open ul {
+       margin-top: 25px; /* Kurangi margin top */
+   }
+    .navigation.open li {
+        padding: 8px 0; /* Kurangi padding item list */
+    }
+    .navigation.open a,
+    .navigation.open .mobile-login-button {
+       font-size: 15px;
+       padding: 0 8px; /* Sesuaikan padding horizontal */
+    }
+    .mobile-menu-close {
+       font-size: 24px;
+       top: 8px;
+       right: 10px;
+       padding: 3px;
+   }
+}
+
+/* Gaya untuk mencegah scroll body saat mobile menu terbuka */
+body.mobile-menu-open {
+  overflow: hidden;
+}

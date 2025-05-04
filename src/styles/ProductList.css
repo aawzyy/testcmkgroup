@@ -1,0 +1,185 @@
+/* src/styles/ProductList.css */
+
+/* Basic styling for the section container */
+.product-section {
+  padding: 50px 0; /* Padding top and bottom */
+  background-color: #f5f5f5;
+  position: relative;
+}
+
+/* Container for the content within the section */
+.product-list-container {
+  max-width: 1200px; /* Maximum width for large screens */
+  margin: 0 auto; /* Center the container */
+  padding: 0 20px; /* Add horizontal padding to prevent content from touching edges */
+  box-sizing: border-box; /* Include padding in the element's total width */
+}
+
+/* Header section (Title and "View All" link) */
+.product-list-header {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space out title and link */
+  align-items: center; /* Vertically align items */
+  margin-bottom: 30px; /* Space below the header */
+  border-bottom: 1px solid #eee; /* Bottom border */
+  padding-bottom: 15px; /* Padding above the border */
+  flex-wrap: wrap; /* Allow items to wrap to the next line if not enough space */
+}
+
+.product-list-header h2 {
+  font-size: 1.8rem; /* Font size for the title */
+  font-weight: 500;
+  color: #333;
+  margin: 0; /* Remove default margin */
+  flex-grow: 1; /* Allow title to grow */
+  /* flex-shrink: 1; */ /* Title can shrink if needed, default is fine */
+  margin-right: 20px; /* Space between title and link on larger screens */
+  /* Prevent title from taking up too much space if the link is wide */
+  max-width: calc(100% - 150px); /* Example: Title takes max width minus approx button width */
+}
+
+/* Styling for the "View All" link */
+.view-all-link {
+  text-decoration: none;
+  color: #000;
+  font-size: small;
+  font-weight: 600;
+  background-color: #fff;
+  padding: 12px 25px;
+  border-radius: 10em;
+  border: solid 1px #000;
+  transition: background-color 0.2s ease;
+  display: inline-block;
+  flex-shrink: 0; /* Prevent button from shrinking */
+  text-align: center; /* Center text inside the button */
+  /* Set a minimum width if needed, but padding usually handles this */
+  /* min-width: 120px; */
+}
+
+.view-all-link:hover {
+  background-color: #dde2e6;
+}
+
+/* Styles for the Swiper container */
+.product-swiper {
+  width: 100%; /* Ensure Swiper takes full width available */
+}
+
+/* Styles for individual Swiper slides (contains the ProductCard) */
+.swiper-slide {
+  /* Define a base width for the slides when slidesPerView is 'auto' */
+  width: 280px; /* Adjust this width based on your ProductCard size */
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+
+/* --- Media Queries for Responsiveness --- */
+
+/* Tablets and smaller Desktops */
+@media (max-width: 1024px) {
+  .product-list-container {
+      padding: 0 15px; /* Reduce horizontal padding */
+  }
+
+  .product-list-header h2 {
+      font-size: 1.6rem; /* Slightly smaller title font */
+      margin-right: 15px;
+       max-width: calc(100% - 120px); /* Adjust max-width for title */
+  }
+
+  .view-all-link {
+      padding: 10px 20px; /* Slightly smaller button padding */
+  }
+
+  /* Adjust slide width for these screen sizes if using slidesPerView='auto' */
+   .swiper-slide {
+       width: 250px; /* Example: slightly smaller card width */
+   }
+}
+
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .product-section {
+      padding: 30px 0; /* Reduce vertical padding */
+  }
+
+  .product-list-container {
+      padding: 0 10px; /* Reduce horizontal padding further */
+  }
+
+  /* Stack header items vertically */
+  .product-list-header {
+      flex-direction: column;
+      align-items: flex-start; /* Align items to the start (left) */
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+  }
+
+  .product-list-header h2 {
+      font-size: 1.5rem; /* Smaller title font */
+      margin-bottom: 10px; /* Space between title and button */
+      margin-right: 0; /* Remove right margin when stacked */
+      max-width: 100%; /* Allow title to take full width when stacked */
+  }
+
+  /* --- Penyesuaian Tombol LIHAT SEMUA di Layar Kecil --- */
+  .view-all-link {
+       /* Tombol ambil lebar penuh kontainer header */
+      text-align: center; /* Pusatkan teks di dalam tombol */
+      padding: 12px 20px; /* Sesuaikan padding tombol */
+      margin-top: 10px; /* Beri sedikit ruang di atas tombol jika perlu (opsional, tergantung desain) */
+       /* Remove any left/right specific positioning if stacked */
+       margin-left: 0;
+       margin-right: 0;
+  }
+
+   /* Adjust slide width for mobile if using slidesPerView='auto' */
+   .swiper-slide {
+       width: 220px; /* Example: smaller card width for phones */
+   }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+   .product-section {
+       padding: 20px 0;
+   }
+
+   .product-list-container {
+       padding: 0 5px; /* Minimal horizontal padding */
+   }
+
+   .product-list-header h2 {
+       font-size: 1.3rem; /* Even smaller title */
+       margin-bottom: 8px; /* Adjust space */
+   }
+
+   .view-all-link {
+       padding: 10px 15px; /* Smaller button padding */
+       margin-top: 8px; /* Adjust space */
+   }
+
+   /* Adjust slide width for very small phones */
+   .swiper-slide {
+       width: 180px; /* Example: smallest card width */
+   }
+}
+
+/* Clean up or ignore the unused .product-grid styles */
+/* You can remove this block entirely if you are fully using Swiper */
+/*
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+@media (min-width: 1400px) {
+  .product-grid {
+      grid-template-columns: repeat(4, 1fr);
+  }
+}
+*/

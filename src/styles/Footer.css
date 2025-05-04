@@ -1,0 +1,92 @@
+/* src/styles/Footer.css */
+.app-footer {
+    background-color: #f8f9fa; /* Latar belakang abu */
+    color: #555;
+    padding-top: 40px; /* Padding atas */
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 30px 20px; /* Padding samping dan bawah */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Kolom responsif */
+    gap: 30px; /* Jarak antar kolom */
+  }
+  
+  .footer-column h4 {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    text-transform: uppercase; /* Huruf besar */
+  }
+  
+  .footer-column p,
+  .footer-column li {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-column a {
+    color: #555;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .footer-column a:hover {
+    color: #007bff; /* Warna link saat hover */
+  }
+  
+  .logo-address h4 {
+    font-size: 1.2rem; /* Logo lebih besar */
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 15px; /* Jarak ikon sosial */
+    margin-bottom: 20px;
+  }
+  
+  .social-icons a {
+    color: #555;
+    font-size: 1.2rem; /* Ukuran ikon sosial */
+  }
+  
+  .app-badges {
+    display: flex;
+    flex-direction: column; /* Tumpuk badge */
+    gap: 10px;
+  }
+  
+  .app-badges img {
+    height: 40px; /* Tinggi badge */
+    width: auto;
+  }
+  
+  .footer-bottom {
+    background-color: #e9ecef; /* Warna dasar bawah */
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 20px; /* Jarak dari konten footer */
+  }
+  
+  .footer-bottom p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #6c757d; /* Warna teks copyright */
+  }
+
+  .app-badges.horizontal {
+    flex-direction: row;
+    gap: 10px;
+  }
+  

@@ -1,0 +1,144 @@
+/* styles/LoginModal.css */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px 25px; /* Adjust padding if needed */
+  border-radius: 12px;
+  width: 80%;
+  max-width: 400px; /* Keep max width */
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  font-family: sans-serif; /* Using a generic sans-serif, replace with your project's font if needed */
+  color: #333; /* Dark grey text color for better contrast */
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 28px; /* Slightly larger close button */
+  cursor: pointer;
+  color: #888;
+  padding: 0; /* Remove default button padding */
+  line-height: 1; /* Center the X vertically */
+}
+
+.modal-title {
+  text-align: center;
+  font-size: 20px; /* Slightly smaller title */
+  margin-bottom: 25px;
+  font-weight: 600; /* Make title a bit bolder */
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 14px; /* Adjust label font size */
+  color: #555; /* Slightly lighter color for labels */
+}
+
+.rounded-input {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 50px;
+  border: 1px solid #ddd; /* Lighter border color */
+  font-size: 14px;
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.password-input-wrapper {
+  position: relative;
+  display: flex; /* Use flexbox to align input and button */
+  align-items: center;
+}
+
+.password-input-wrapper input {
+  flex-grow: 1; /* Allow input to fill space */
+  padding-right: 40px; /* Add padding on the right for the icon */
+}
+
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 15px; /* Adjust right position */
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 5px; /* Add some padding for easier clicking */
+  display: flex; /* Use flex to center icon if needed */
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-password img {
+    width: 20px; /* Set icon size */
+    height: 20px;
+    display: block; /* Remove extra space below image */
+}
+
+
+.gold-button {
+  width: 100%;
+  padding: 14px;
+  /* Gradient from mockup */
+  background: linear-gradient(to bottom, #F0D98D, #C9A83F);
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600; /* Bolder button text */
+  cursor: pointer;
+  margin-top: 15px; /* Adjust margin top */
+  color: #333; /* Dark text color for the button */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow on button */
+  transition: background 0.3s ease; /* Add a subtle transition */
+}
+
+.gold-button:hover {
+    background: linear-gradient(to top, #F0D98D, #C9A83F); /* Inverse gradient on hover */
+}
+
+
+.forgot-password {
+  text-align: center;
+  margin-top: 15px;
+  font-weight: 500;
+  font-size: 14px; /* Adjust font size */
+  color: #555; /* Match label color */
+  cursor: pointer;
+}
+
+.register-text {
+  text-align: center;
+  margin-top: 15px; /* Adjust margin top */
+  font-size: 14px;
+  color: #333; /* Match main text color */
+}
+
+.register-link {
+  color: #C9A83F; /* Match the darker gold from the button */
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none; /* Remove underline if present */
+}
+
+.register-link:hover {
+    text-decoration: underline; /* Add underline on hover */
+}

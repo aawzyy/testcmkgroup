@@ -1,0 +1,119 @@
+/* src/styles/ProductCard.css - Disesuaikan untuk Tampilan Persis Gambar Terbaru */
+
+.product-card {
+  background-color: #fff; /* Latar belakang putih */
+  border: 1px solid #e0e0e0; /* Border tipis */
+  border-radius: 8px; /* Sudut membulat */
+  overflow: hidden; /* Agar konten di dalam mengikuti border-radius */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Bayangan */
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  height: 100%; /* Tinggi konsisten di grid */
+  cursor: pointer; /* Menandakan bisa diklik */
+  position: relative; /* Diperlukan untuk positioning absolut jika ada elemen di dalam */
+  text-decoration: none; /* Hapus dekorasi link jika card dibungkus link */
+  color: inherit; /* Warisi warna teks */
+}
+
+.product-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Bayangan lebih kuat saat hover */
+  transform: translateY(-5px); /* Efek terangkat */
+}
+
+.product-image-container {
+  width: 100%;
+  /* Hapus padding atau background di sini agar gambar mendekati tepi atas */
+  padding: 0;
+  text-align: center; /* Tengahkan gambar */
+  background-color: #f8f8f8; /* Latar belakang sangat terang di area gambar */
+  position: relative; /* Diperlukan untuk positioning absolut label */
+  /* Atur tinggi relatif untuk menjaga rasio jika perlu */
+  padding-bottom: 85%; /* Contoh rasio aspek gambar (sesuaikan jika gambar Anda berbeda) */
+  height: 0; /* Penting saat pakai padding-bottom untuk rasio */
+  overflow: hidden; /* Sembunyikan jika gambar melebihi area */
+}
+
+.product-image-container img {
+  position: absolute; /* Atur gambar relatif terhadap kontainer */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Pastikan gambar proporsional */
+  padding: 10px; /* Beri padding di dalam kontainer gambar agar ada ruang */
+  box-sizing: border-box;
+}
+
+/* Styling untuk area label kuning di gambar */
+.product-label-area {
+    position: absolute; /* Posisikan relatif terhadap .product-image-container */
+    bottom: 0; /* Letakkan di bagian bawah kontainer gambar */
+    left: 0;
+    width: 100%;
+    background-color: #ffc107; /* Warna kuning */
+    color: #000; /* Warna teks hitam */
+    font-size: 0.85rem;
+    font-weight: bold;
+    padding: 8px 10px; /* Padding di dalam area label */
+    text-align: left; /* Teks rata kiri di label */
+    display: flex; /* Gunakan flexbox untuk label dan harga di baris kuning */
+    justify-content: space-between; /* Label di kiri, harga di kanan */
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.product-label-area span {
+    /* Styling tambahan untuk teks label jika perlu */
+    flex-shrink: 0; /* Jangan biarkan teks label mengecil */
+}
+
+.product-label-area .label-price {
+    /* Styling untuk harga di baris label */
+    font-size: 0.85rem; /* Ukuran sama dengan teks label */
+    font-weight: bold;
+    margin-left: 10px; /* Beri jarak antara label dan harga */
+    flex-shrink: 0; /* Jangan biarkan harga di label mengecil */
+}
+
+
+.product-info {
+  padding: 15px;
+  text-align: center; /* Teks di tengah */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  /* Hapus justify-content: space-between; agar harga di bawah judul */
+  align-items: center; /* Tengahkan konten teks */
+  justify-content: flex-end; /* Ratakan konten info ke bawah card */
+}
+
+.product-info h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  margin: 0 0 10px 0; /* Jarak ke harga */
+  line-height: 1.3;
+  min-height: 2.6em; /* Untuk 2 baris judul */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+
+/* Styling untuk harga lama/coret */
+.product-old-price {
+    font-size: 0.9rem; /* Ukuran sedikit lebih kecil */
+    color: #999; /* Warna abu-abu */
+    text-decoration: line-through; /* Teks dicoret */
+    margin: 0 0 2px 0; /* Jarak 2px di bawah harga lama */
+}
+
+/* Styling untuk harga saat ini */
+.product-current-price {
+  font-size: 1.1rem; /* Ukuran standar */
+  font-weight: bold;
+  color: #dc3545; /* Warna merah (sesuai gambar) */
+  margin: 0; /* Hapus margin atas */
+}
