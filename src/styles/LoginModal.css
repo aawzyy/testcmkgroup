@@ -142,3 +142,28 @@
 .register-link:hover {
     text-decoration: underline; /* Add underline on hover */
 }
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Style untuk tombol saat disabled */
+.gold-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Style untuk input saat disabled */
+.rounded-input:disabled {
+    background-color: #e9e9e9;
+    cursor: not-allowed;
+}
+
+/* Style untuk toggle password button saat disabled */
+.password-input-wrapper button.toggle-password:disabled {
+     cursor: not-allowed;
+     opacity: 0.6;
+}
