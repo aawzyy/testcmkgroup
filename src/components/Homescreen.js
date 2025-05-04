@@ -4,12 +4,17 @@ import Hero from './Hero';
 import ProductList from './ProductList';
 import Footer from './Footer';
 
-// Homescreen sekarang hanya merakit bagian-bagian lain
-// dan meneruskan onLoginClick ke Header
-function Homescreen({ onLoginClick }) {
+// Homescreen sekarang merakit bagian-bagian lain
+// dan meneruskan onLoginClick serta onLogoutClick ke Header
+// Halaman lain di Homescreen tidak perlu tahu tentang login/logout
+function Homescreen({ onLoginClick, onLogoutClick }) { // <<< Tambahkan onLogoutClick di sini
   return (
     <div className="homescreen">
-      <Header onLoginClick={onLoginClick} />
+      {/* Teruskan onLoginClick dan onLogoutClick ke Header */}
+      <Header
+          onLoginClick={onLoginClick}
+          onLogoutClick={onLogoutClick} // <<< Teruskan prop onLogoutClick ke Header
+      />
       <main>
         <Hero />
         <ProductList />

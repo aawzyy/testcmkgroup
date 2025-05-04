@@ -1,64 +1,91 @@
 import React, { useState } from 'react';
-import '../styles/LoginModal.css'; // Pastikan path ini benar
+import { toast } from 'react-toastify';
+import '../styles/LoginModal.css';
+import useAuthStore from '../store/authStore'; // Import store Zustand
 
-function LoginModal({ isOpen, onClose, onLoginSubmit }) { // onLoginSubmit mungkin tidak lagi dibutuhkan jika API menangani semuanya
+function LoginModal({ isOpen, onClose }) { // Hapus onLoginSubmit jika tidak lagi dibutuhkan parent
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // State untuk loading
-  const [error, setError] = useState(null); // State untuk error
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Jika modal tidak terbuka, jangan render apa pun
+  // Ambil action 'login' dari store Zustand
+  const loginUser = useAuthStore((state) => state.login);
+
   if (!isOpen) return null;
 
-  const handleSubmit = async (e) => { // Gunakan async di sini
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null); // Bersihkan error sebelumnya
-    setIsLoading(true); // Set loading menjadi true
+    setError(null);
+    setIsLoading(true);
 
     try {
-      const response = await fetch('https://cmkgrouptest.free.beeceptor.com/api/login', {
+      const response = await fetch('https://cmktest.free.beeceptor.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Jika API memerlukan header lain (misalnya Authorization), tambahkan di sini
         },
         body: JSON.stringify({
-          username: username, // Sesuaikan nama field jika API mengharapkan nama lain (misal: email, phone)
+          username: username,
           password: password,
         }),
       });
 
-      // Beeceptor akan selalu mengembalikan respons sukses (status 200)
-      // Namun dalam aplikasi nyata, Anda akan memeriksa response.ok
-      // atau response.status (misalnya if (response.status === 200))
 
-      // Dalam contoh nyata, Anda akan memeriksa response.ok atau status code
-      // if (!response.ok) {
-      //   const errorData = await response.json(); // Coba baca pesan error dari body
-      //   throw new Error(errorData.message || 'Login failed'); // Lempar error
-      // }
+      if (!response.ok) {
+        // Jika tidak berhasil (misal: 401 Unauthorized, 404 Not Found, dll.)
+        // Coba baca body respons untuk pesan error dari server (opsional)
+        let errorData = {};
+        try {
+          // Jika server mengembalikan JSON berisi pesan error
+          errorData = await response.json();
+        } catch (parseError) {
+          // Jika body bukan JSON atau kosong, gunakan status text
+          errorData.message = response.statusText || 'Login failed';
+        }
+        // Lempar Error agar ditangkap di block catch
+        throw new Error(errorData.message || 'Login failed');
+      }
 
-      const data = await response.json(); // Baca response body (untuk logging atau pemrosesan data sukses)
-      console.log('Login successful:', data); // Log data response
+      // Jika respons berhasil (response.ok adalah true), parse body-nya sebagai JSON
+      const apiResponse = await response.json(); // <<< INI YANG PENTING: Parsing JSON
+      // >>> Akhir SIMULASI <<<
 
-      // Jika login sukses (dalam kasus nyata, Anda akan memproses token atau info user di sini)
-      // Anda bisa memanggil onLoginSubmit atau prop lain untuk memberi tahu parent
-      // if (onLoginSubmit) {
-      //    onLoginSubmit(data); // Kirim data response sukses ke parent jika perlu
-      // }
 
-      // Tutup modal dan reset form setelah sukses
+      console.log('Login successful (Simulated):', apiResponse);
+
+      // Panggil action login dari store Zustand
+      loginUser(apiResponse); // Kirim data user yang didapat/disimulasikan dari API
+
+      toast.success("Berhasil Login!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
       onClose();
       setUsername('');
       setPassword('');
 
     } catch (err) {
       console.error('Login error:', err);
-      setError(err.message || 'Terjadi kesalahan saat mencoba login. Silakan coba lagi.'); // Set pesan error
-      // Jangan tutup modal jika terjadi error, biarkan user mencoba lagi
+      setError(err.message || 'Terjadi kesalahan saat mencoba login. Silakan coba lagi.');
+       toast.error(err.message || 'Login gagal!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+       });
     } finally {
-      setIsLoading(false); // Set loading menjadi false setelah selesai (baik sukses maupun error)
+      setIsLoading(false);
     }
   };
 
@@ -68,9 +95,7 @@ function LoginModal({ isOpen, onClose, onLoginSubmit }) { // onLoginSubmit mungk
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
-      // Tutup modal hanya jika mengklik overlay
       onClose();
-      // Opsional: reset form dan error saat menutup via overlay
       setUsername('');
       setPassword('');
       setError(null);
@@ -80,7 +105,7 @@ function LoginModal({ isOpen, onClose, onLoginSubmit }) { // onLoginSubmit mungk
 
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}> {/* Stop propagation agar klik di konten tidak menutup modal */}
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close-button" onClick={onClose}>×</button>
         <h2 className="modal-title">Log in / Masuk</h2>
         <form onSubmit={handleSubmit} className="login-form">
@@ -93,7 +118,7 @@ function LoginModal({ isOpen, onClose, onLoginSubmit }) { // onLoginSubmit mungk
               onChange={(e) => setUsername(e.target.value)}
               className="rounded-input"
               required
-              disabled={isLoading} // Nonaktifkan input saat loading
+              disabled={isLoading}
             />
           </div>
           <div className="form-group">
@@ -106,14 +131,14 @@ function LoginModal({ isOpen, onClose, onLoginSubmit }) { // onLoginSubmit mungk
                 onChange={(e) => setPassword(e.target.value)}
                 className="rounded-input"
                 required
-                disabled={isLoading} // Nonaktifkan input saat loading
+                disabled={isLoading}
               />
               <button
                 type="button"
                 className="toggle-password"
                 onClick={toggleShowPassword}
                 aria-label="Toggle password visibility"
-                disabled={isLoading} // Nonaktifkan tombol toggle saat loading
+                disabled={isLoading}
               >
                 {showPassword ? (
                   <i className="far fa-eye-slash"></i>
@@ -124,15 +149,14 @@ function LoginModal({ isOpen, onClose, onLoginSubmit }) { // onLoginSubmit mungk
             </div>
           </div>
 
-          {/* Tampilkan pesan error jika ada */}
           {error && <p className="error-message">{error}</p>}
 
           <button
             type="submit"
             className="gold-button"
-            disabled={isLoading} // Nonaktifkan tombol saat loading
+            disabled={isLoading}
           >
-            {isLoading ? 'Loading...' : 'Login'} {/* Tampilkan teks loading */}
+            {isLoading ? 'Loading...' : 'Login'}
           </button>
         </form>
         <p className="forgot-password">Lupa Password</p>

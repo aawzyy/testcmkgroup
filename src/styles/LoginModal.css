@@ -167,3 +167,73 @@
      cursor: not-allowed;
      opacity: 0.6;
 }
+
+/* --- Gaya Tambahan untuk Modal Konfirmasi --- */
+
+.modal-message {
+  text-align: center;
+  margin-bottom: 20px; /* Jarak bawah pesan */
+  font-size: 16px;
+  color: #555; /* Warna teks pesan */
+}
+
+.modal-actions {
+  display: flex; /* Menggunakan flexbox untuk menata tombol */
+  justify-content: space-around; /* Memberi jarak antar tombol */
+  gap: 15px; /* Jarak antara tombol (opsional, alternatif justify-content) */
+  margin-top: 25px; /* Jarak atas dari pesan */
+}
+
+.modal-actions .button {
+  flex-grow: 1; /* Tombol akan berusaha mengisi ruang yang tersedia */
+  padding: 12px 20px;
+  border-radius: 30px; /* Bentuk tombol membulat */
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+  /* Reset beberapa gaya default button */
+  -webkit-appearance: none; /* Untuk konsistensi di beberapa browser */
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.modal-actions .primary-button {
+  /* Gaya untuk tombol utama (misal: Ya, Logout) */
+  background: linear-gradient(to bottom, #F0D98D, #C9A83F); /* Gunakan gradient yang sama dengan tombol login */
+  color: #333; /* Warna teks tombol utama */
+  border: none;
+}
+
+.modal-actions .primary-button:hover {
+    background: linear-gradient(to top, #F0D98D, #C9A83F); /* Inverse gradient on hover */
+}
+
+.modal-actions .primary-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #ddd; /* Warna solid saat disabled */
+    color: #666;
+}
+
+
+.modal-actions .secondary-button {
+  /* Gaya untuk tombol sekunder (misal: Batal) */
+  background: white; /* Latar belakang putih */
+  color: #555; /* Warna teks tombol sekunder */
+  border: 1px solid #ccc; /* Border abu-abu */
+}
+
+.modal-actions .secondary-button:hover {
+    background-color: #f0f0f0; /* Warna latar belakang sedikit gelap saat hover */
+    border-color: #bbb;
+}
+
+.modal-actions .secondary-button:disabled {
+     opacity: 0.6;
+     cursor: not-allowed;
+     background-color: #e9e9e9;
+     color: #999;
+     border-color: #ccc;
+}
